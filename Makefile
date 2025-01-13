@@ -1,5 +1,8 @@
-SRCS =	srcs/ft_split.c	\
+SRCS =	srcs/error.c	\
+		srcs/ft_split.c	\
+		srcs/init.c		\
 		srcs/main.c		\
+		srcs/utils.c	\
 
 OBG =	$(SRCS:.c=.o)
 

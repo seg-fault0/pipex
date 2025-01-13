@@ -6,13 +6,17 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:39 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/13 16:45:58 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/13 17:22:00 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-	printf("Hello world");
+	char **cmd;
+
+	if (is_arg_valid(--argc, ++argv))
+		return (1);
+	ft_putstr("WE ARE READY\n");
 }
