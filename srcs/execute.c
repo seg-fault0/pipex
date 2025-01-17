@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/17 21:09:18 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/17 21:29:03 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,17 @@ void ft_execute(t_pipex *pipex, int *pfd, int count, int max)
 		in_pross(pipex, pfd, count);
 }
 
-void	ft_pipex(t_pipex *pipex, int count, int max)
+void	ft_pipex(t_pipex *pipex, int *pfd, int count, int max)
 {
-	int			pfd[2];
 	int			pid;
 	int			id;
 
 	if (count == max)
 		return ;
 	if(count <= max - 1)
-	{
-		pid = pipe(pfd);
 		id = fork();
-	}
 	if (id == 0)
-		ft_pipex(pipex, count + 1, max);
+		ft_pipex(pipex, pfd, count + 1, max);
 	else
 	{
 		wait(NULL);
