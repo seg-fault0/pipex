@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/17 18:17:08 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/17 18:21:01 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,18 @@ char ***get_cmd(int argc, char *argv[])
 {
 	char	***cmd;
 	int		i;
+	int		j;
 
 	cmd = malloc ((argc - 2) * sizeof(char **) + 1);
 	if (!cmd)
 		return (NULL);
-	i = 0;
-	while (i < argc - 2)
+	i = argc - 3;
+	j = 0;
+	while (i >= 0)
 	{
-		cmd[i] = ft_split(argv[i + 1], ' ');
-		i++;
+		cmd[i] = ft_split(argv[j + 1], ' ');
+		j++;
+		i--;
 	}
 	cmd[i] = NULL;
 	return (cmd);
