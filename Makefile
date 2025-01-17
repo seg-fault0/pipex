@@ -1,4 +1,5 @@
 SRCS =	srcs/error.c	\
+		srcs/exit.c	\
 		srcs/ft_split.c	\
 		srcs/init.c		\
 		srcs/main.c		\
@@ -27,3 +28,6 @@ fclean : clean
 	rm -fr $(NAME)
 
 .PHONY : clean
+
+lldb : 
+	clang -g srcs/*.c -I includes/ -o $(NAME)
