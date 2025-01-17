@@ -1,5 +1,6 @@
 SRCS =	srcs/error.c	\
-		srcs/exit.c	\
+		srcs/execute.c	\
+		srcs/exit.c		\
 		srcs/ft_split.c	\
 		srcs/init.c		\
 		srcs/main.c		\
@@ -26,6 +27,8 @@ clean :
 
 fclean : clean
 	rm -fr $(NAME)
+
+re : fclean all
 
 .PHONY : clean
 

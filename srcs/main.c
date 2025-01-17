@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:39 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/17 18:19:12 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/17 20:02:40 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 int main(int argc, char *argv[])
 {
 	t_pipex *pipex;
+	int		process_nbr;
 
 	if (argc < 5)
 		return (error_msg(1), 1);
 	pipex = pipex_init(--argc, ++argv);
 	if(!pipex)
 		return (1);
-	for(int i = 0; pipex->cmd[i]; i++)
-		printf("cmd[%d] = %s\n", i, pipex->cmd[i][0]);
+	process_nbr = argc - 2;
+	ft_pipex(pipex, 0, process_nbr);
+	return (0);
 }
