@@ -6,11 +6,26 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/17 16:08:28 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/17 18:17:08 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_add_path(t_pipex *pipex)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (pipex->cmd[i])
+	{
+		tmp = pipex->cmd[i][0];
+		pipex->cmd[i][0] = ft_strjoin(BIN_PATH, pipex->cmd[i][0]);
+		free(tmp);
+		i++;
+	}
+}
 
 int	are_cmd_exe(int argc, char **argv, char ***cmd)
 {
@@ -20,7 +35,7 @@ int	are_cmd_exe(int argc, char **argv, char ***cmd)
 	i = 0;
 	while(cmd[i])
 	{
-		tmp_cmd = ft_strjoin("/usr/bin/", cmd[i][0]);
+		tmp_cmd = ft_strjoin(BIN_PATH, cmd[i][0]);
 		if (access(tmp_cmd, X_OK) != 0)
 			return (free(tmp_cmd), error_msg(4), 1);
 		free(tmp_cmd);
@@ -65,5 +80,6 @@ t_pipex	*pipex_init(int argc, char *argv[])
 		return(close(pipex->outfd), close(pipex->infd), free(pipex), NULL);
 	if (are_cmd_exe(argc, argv, pipex->cmd))
 		return (close(pipex->outfd), close(pipex->infd), free(pipex), NULL); //leaks : free (pipex->cmd)
+	ft_add_path(pipex);
 	return (pipex);
 }

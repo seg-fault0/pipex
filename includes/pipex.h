@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:09 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/17 15:33:39 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/17 18:17:03 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 //headers
 # include <libc.h>
+
+//Macros
+# define BIN_PATH "/usr/bin/"
 
 //struct
 typedef struct s_pipex
