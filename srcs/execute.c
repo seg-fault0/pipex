@@ -6,67 +6,64 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/17 21:29:03 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/20 20:21:22 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	first_pross(t_pipex *pipex, int *pfd, int count)
+void	fd_manager(t_pipex *pipex, int	rfd, int wfd)
 {
-	ft_putstr("hello form the first pross\n");
-	close(pipex->outfd);
-	close(pfd[0]);
-	dup2(pipex->infd, 0);
-	dup2(pfd[1], 1);
+	if (pipex->count == 0)
+	{
+		dprintf(2, "first pross\n");
+		dup2(rfd, STDIN);
+		dup2(wfd, STDOUT);
+	}
+	else if(pipex->count == pipex->max_count - 1)
+	{
+		dprintf(2, "last pross\n");
+		dup2(pipex->outfd, STDOUT);
+		dup2(rfd, STDIN);
+	}
+	else 
+	{
+		dprintf(2, "in pross\n");
+		close(pipex->infd);
+		close(pipex->outfd);
+		dup2(rfd, STDIN);
+		dup2(wfd, STDOUT);
+	}
+}
+
+void	ft_execute(t_pipex *pipex, int rfd, int wfd)
+{
+	int	count;
+	fd_manager(pipex, rfd, wfd);
+	count = pipex->count;
+	dprintf(2, "count = %d | max = %d\n\n", count, pipex->max_count);
 	execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
 }
 
-void	in_pross(t_pipex *pipex, int *pfd, int count)
+void	ft_start(t_pipex *pipex, int rfd)
 {
-	ft_putstr("hello form the in pross\n");
-	close(pipex->infd);
-	close(pipex->outfd);
-	dup2(pfd[0], 0);
-	dup2(pfd[1], 1);
-	execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
-}
+	int pfd[2];
+	int	pid;
 
-void	last_pross(t_pipex *pipex, int *pfd, int count)
-{
-	ft_putstr("hello form the last pross\n");
-	close(pipex->infd);
-	close(pfd[1]);
-	dup2(pfd[0], 0);
-	dup2(pipex->outfd, 1);
-	execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
-}
-
-void ft_execute(t_pipex *pipex, int *pfd, int count, int max)
-{
-	printf("count = %d | max = %d\n", count, max);
-	if (count == max - 1)
-		first_pross(pipex, pfd, count);
-	else if (count == 0)
-		last_pross(pipex, pfd, count);
-	else
-		in_pross(pipex, pfd, count);
-}
-
-void	ft_pipex(t_pipex *pipex, int *pfd, int count, int max)
-{
-	int			pid;
-	int			id;
-
-	if (count == max)
+	if(pipex->count <= pipex->max_count - 1)
+	{
+		pipe(pfd);
+		pid = fork();
+	}
+	if (pipex->count >= pipex->max_count)
 		return ;
-	if(count <= max - 1)
-		id = fork();
-	if (id == 0)
-		ft_pipex(pipex, pfd, count + 1, max);
+	if (pid == 0)
+		ft_execute(pipex, rfd , pfd[1]);
 	else
 	{
 		wait(NULL);
-		ft_execute(pipex, pfd, count, max);
+		close(pfd[1]);
+		pipex->count++;
+		ft_start(pipex, pfd[0]);
 	}
 }

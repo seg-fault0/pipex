@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:09 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/17 21:27:19 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/20 20:00:22 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 //Macros
 # define BIN_PATH "/usr/bin/"
+# define STDIN 0
+# define STDOUT 1
 
 //struct
 typedef struct s_pipex
@@ -25,7 +27,8 @@ typedef struct s_pipex
 	char	***cmd;
 	int		infd;
 	int		outfd;
-	int		log;
+	int		count;
+	int		max_count;
 } t_pipex;
 
 //utils
@@ -39,6 +42,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 //core
 t_pipex	*pipex_init(int argc, char *argv[]);
 void	ft_exit(t_pipex *pipex);
-void	ft_pipex(t_pipex *pipex, int *pfd, int count, int max);
+void	ft_start(t_pipex *pipex, int rfd);
 
 #endif

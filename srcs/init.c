@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/17 20:38:22 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/20 19:44:27 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_pipex	*pipex_init(int argc, char *argv[])
 	if (are_cmd_exe(argc, argv, pipex->cmd))
 		return (close(pipex->outfd), close(pipex->infd), free(pipex), NULL); //leaks : free (pipex->cmd)
 	ft_add_path(pipex);
-	pipex->log = open("log", O_RDWR); // to rm
+	pipex->count = 0;
+	pipex->max_count = argc - 2;
 	return (pipex);
 }
