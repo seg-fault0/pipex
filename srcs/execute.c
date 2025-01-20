@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/20 20:21:22 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/20 21:01:03 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	ft_execute(t_pipex *pipex, int rfd, int wfd)
 	int	count;
 	fd_manager(pipex, rfd, wfd);
 	count = pipex->count;
-	dprintf(2, "count = %d | max = %d\n\n", count, pipex->max_count);
+	dprintf(2, "count = %d | max = %d\n", count, pipex->max_count);
+	dprintf(2, "executed command = %s\n\n", pipex->cmd[count][0]+9);
 	execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
 }
 
@@ -50,13 +51,10 @@ void	ft_start(t_pipex *pipex, int rfd)
 	int pfd[2];
 	int	pid;
 
-	if(pipex->count <= pipex->max_count - 1)
-	{
-		pipe(pfd);
-		pid = fork();
-	}
-	if (pipex->count >= pipex->max_count)
+	if (pipex->count == pipex->max_count)
 		return ;
+	pipe(pfd);
+	pid = fork();
 	if (pid == 0)
 		ft_execute(pipex, rfd , pfd[1]);
 	else
