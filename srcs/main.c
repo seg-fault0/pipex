@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:39 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/20 19:42:46 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/21 00:38:54 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int main(int argc, char *argv[])
 	if(!pipex)
 		return (1);
 	ft_start(pipex, pipex->infd);
+	ft_exit(pipex);
 	return (0);
 }

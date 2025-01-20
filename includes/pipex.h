@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:09 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/20 20:00:22 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/21 00:43:30 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 //core
 t_pipex	*pipex_init(int argc, char *argv[]);
 void	ft_exit(t_pipex *pipex);
+void	free_cmd(char ***cmd);
 void	ft_start(t_pipex *pipex, int rfd);
 
 #endif

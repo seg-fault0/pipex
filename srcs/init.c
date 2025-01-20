@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/20 21:02:55 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/21 00:46:35 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ char ***get_cmd(int argc, char *argv[])
 	while (i < argc - 2)
 	{
 		cmd[i] = ft_split(argv[i + 1], ' ');
+		if (!cmd[i])
+			return(error_msg(5), cmd);
 		i++;
 	}
 	cmd[i] = NULL;
 	return (cmd);
-}//potention leak if split faild any allocation faild
+}
 
 t_pipex	*pipex_init(int argc, char *argv[])
 {
@@ -78,9 +80,9 @@ t_pipex	*pipex_init(int argc, char *argv[])
 		return(close(pipex->infd), free(pipex), error_msg(6), NULL);
 	pipex->cmd = get_cmd(argc, argv);
 	if (!pipex->cmd)
-		return(close(pipex->outfd), close(pipex->infd), free(pipex), NULL);
+		return(ft_exit(pipex), NULL);
 	if (are_cmd_exe(argc, argv, pipex->cmd))
-		return (close(pipex->outfd), close(pipex->infd), free(pipex), NULL); //leaks : free (pipex->cmd)
+		ft_exit(pipex);
 	ft_add_path(pipex);
 	pipex->count = 0;
 	pipex->max_count = argc - 2;
