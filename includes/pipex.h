@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:09 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/21 00:50:00 by wimam            ###   ########.fr       */
+/*   Updated: 2025/01/21 01:14:41 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_pipex
 void	ft_putstr(char *str);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	close_pipe(int *fd);
 
 //core
 t_pipex	*pipex_init(int argc, char *argv[]);
