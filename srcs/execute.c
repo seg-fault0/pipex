@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
+/*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/21 01:14:58 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/09 17:26:32 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,13 @@ void	fd_manager(t_pipex *pipex, int	rfd, int wfd)
 void	ft_execute(t_pipex *pipex, int rfd, int wfd)
 {
 	int	count;
+	int failed;
+
 	fd_manager(pipex, rfd, wfd);
 	count = pipex->count;
-	execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
+	failed = execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
+	if (!failed)
+		return (error_msg(7), close(rfd), close (wfd), ft_exit(pipex));
 }
 
 void	ft_start(t_pipex *pipex, int rfd)

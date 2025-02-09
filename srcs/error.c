@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
+/*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:56:14 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/17 20:16:56 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/09 17:25:15 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 void	error_msg(int msg)
 {
 	if (msg == 1)
-		ft_putstr("ERROR : not enough args\n");
+		ft_putstr_fd("ERROR : not enough args\n", 2);
 	else if (msg == 2)
-		ft_putstr("ERROR : fd duplication faild\n");
+		ft_putstr_fd("ERROR : fd duplication faild\n", 2);
 	else if (msg == 3)
-		ft_putstr("ERROR : execve failed");
+		ft_putstr_fd("ERROR : execve failed", 2);
 	else if (msg == 4)
-		ft_putstr("EROOR : One Of The Commands Can't Be executed\n");
+		ft_putstr_fd("EROOR : One Of The Commands Can't Be executed\n", 2);
 	else if (msg == 5)
-		ft_putstr("EROOR : Allocation Failed\n");
+		ft_putstr_fd("EROOR : Allocation Failed\n", 2);
 	else if (msg == 6)
-		ft_putstr("ERROR : Faild to open fd\n");
+		ft_putstr_fd("ERROR : Faild to open fd\n", 2);
+	else if (msg == 7)
+		ft_putstr_fd("EROOR : execution failed \n", 2);
 }
