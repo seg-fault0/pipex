@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
+/*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/21 00:39:44 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/09 17:49:02 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	free_cmd(char ***cmd)
 	while (cmd[i])
 	{
 		j = 0;
-		while(cmd[i][j])
+		while (cmd[i][j])
 			free(cmd[i][j++]);
 		free(cmd[i++]);
 	}

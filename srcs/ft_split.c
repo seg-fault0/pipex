@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
+/*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:32:44 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/13 18:04:14 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/09 17:49:09 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "pipex.h"
+#include "pipex.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {

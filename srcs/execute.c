@@ -6,13 +6,13 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/09 17:34:42 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/09 17:51:25 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	fd_manager(t_pipex *pipex, int	rfd, int wfd)
+void	fd_manager(t_pipex *pipex, int rfd, int wfd)
 {
 	dup2(rfd, STDIN);
 	if (pipex->count == pipex->max_count - 1)
@@ -27,7 +27,7 @@ void	fd_manager(t_pipex *pipex, int	rfd, int wfd)
 void	ft_execute(t_pipex *pipex, int rfd, int wfd)
 {
 	int	count;
-	int failed;
+	int	failed;
 
 	fd_manager(pipex, rfd, wfd);
 	count = pipex->count;
@@ -38,21 +38,20 @@ void	ft_execute(t_pipex *pipex, int rfd, int wfd)
 
 void	ft_start(t_pipex *pipex, int rfd)
 {
-	int pfd[2];
+	int	pfd[2];
 	int	pid;
-	int failed;
 
 	if (pipex->count == pipex->max_count)
 		return ;
-	failed = pipe(pfd);
-	if (failed == -1)
+	pid = pipe(pfd);
+	if (pid == -1)
 		return (close(rfd), error_msg(8), ft_exit(pipex));
 	pid = fork();
 	if (pid == -1)
 		return (close (rfd), close_pipe(pfd), error_msg(9), ft_exit(pipex));
 	if (pid == 0)
 	{
-		ft_execute(pipex, rfd , pfd[1]);
+		ft_execute(pipex, rfd, pfd[1]);
 		if (pipex->count != 0)
 			close (rfd);
 		close_pipe(pfd);

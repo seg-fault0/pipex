@@ -6,11 +6,11 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:56:14 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/09 17:35:05 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/09 17:48:24 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "pipex.h"
+#include "pipex.h"
 
 void	error_msg(int msg)
 {

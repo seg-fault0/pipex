@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:09 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/09 17:27:23 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/09 17:50:16 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_pipex
 	int		outfd;
 	int		count;
 	int		max_count;
-} t_pipex;
+}	t_pipex;
 
 //utils
 char	**ft_split(char const *s, char c);

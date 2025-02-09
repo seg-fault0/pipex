@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
+/*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/21 00:46:35 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/09 17:49:48 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	are_cmd_exe(int argc, char **argv, char ***cmd)
 	char	*tmp_cmd;
 
 	i = 0;
-	while(cmd[i])
+	while (cmd[i])
 	{
 		tmp_cmd = ft_strjoin(BIN_PATH, cmd[i][0]);
 		if (access(tmp_cmd, X_OK) != 0)
@@ -44,7 +44,7 @@ int	are_cmd_exe(int argc, char **argv, char ***cmd)
 	return (0);
 }
 
-char ***get_cmd(int argc, char *argv[])
+char	***get_cmd(int argc, char *argv[])
 {
 	char	***cmd;
 	int		i;
@@ -58,7 +58,7 @@ char ***get_cmd(int argc, char *argv[])
 	{
 		cmd[i] = ft_split(argv[i + 1], ' ');
 		if (!cmd[i])
-			return(error_msg(5), cmd);
+			return (error_msg(5), cmd);
 		i++;
 	}
 	cmd[i] = NULL;
@@ -75,12 +75,12 @@ t_pipex	*pipex_init(int argc, char *argv[])
 	pipex->infd = open(argv[0], O_RDONLY);
 	if (pipex->infd < 0)
 		return (free(pipex), error_msg(6), NULL);
-	pipex->outfd = open(argv[argc-1], O_WRONLY);
+	pipex->outfd = open(argv[argc - 1], O_WRONLY);
 	if (pipex->outfd < 0)
-		return(close(pipex->infd), free(pipex), error_msg(6), NULL);
+		return (close(pipex->infd), free(pipex), error_msg(6), NULL);
 	pipex->cmd = get_cmd(argc, argv);
 	if (!pipex->cmd)
-		return(ft_exit(pipex), NULL);
+		return (ft_exit(pipex), NULL);
 	if (are_cmd_exe(argc, argv, pipex->cmd))
 		ft_exit(pipex);
 	ft_add_path(pipex);
