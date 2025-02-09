@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wimam <walidimam69@gmail.com>              +#+  +:+       +#+        */
+/*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:09 by wimam             #+#    #+#             */
-/*   Updated: 2025/01/21 01:14:41 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/09 17:20:12 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define PIPEX_H
 
 //headers
-# include <libc.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <sys/wait.h>
 
 //Macros
 # define BIN_PATH "/usr/bin/"
