@@ -20,7 +20,7 @@ BOBG =	$(BSRCS:.c=.o)
 NAME = pipex
 BNAME = pipex_bonus
 
-FLAGS = -Wall -Wextra -Werro
+FLAGS = -Wall -Wextra -Werror
 
 I = -I ./includes/
 
@@ -33,9 +33,9 @@ $(BNAME) : $(BOBG)
 	cc $^ -o $@
 
 $(OBG) : %.o : %.c ./includes/pipex.h
-	cc -c $(I) $< -o $@
+	cc -c $(FLAGS) $(I) $< -o $@
 $(BOBG) : %.o : %.c ./includes/pipex_bonus.h
-	cc -c $(I) $< -o $@
+	cc -c $(FLAGS) $(I) $< -o $@
 
 clean : 
 	rm -f $(OBG) $(BOBG)

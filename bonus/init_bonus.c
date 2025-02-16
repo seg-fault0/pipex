@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/16 05:04:25 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/16 05:12:42 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_add_path(t_pipex *pipex)
 	}
 }
 
-int	are_cmd_exe(int argc, char **argv, char ***cmd)
+int	are_cmd_exe(char ***cmd)
 {
 	int		i;
 	char	*tmp_cmd;
@@ -48,7 +48,6 @@ char	***get_cmd(int argc, char *argv[])
 {
 	char	***cmd;
 	int		i;
-	int		j;
 
 	cmd = malloc ((argc - 2) * sizeof(char **) + 1);
 	if (!cmd)
@@ -81,7 +80,7 @@ t_pipex	*pipex_init(int argc, char *argv[])
 	pipex->cmd = get_cmd(argc, argv);
 	if (!pipex->cmd)
 		return (ft_exit(pipex), NULL);
-	if (are_cmd_exe(argc, argv, pipex->cmd))
+	if (are_cmd_exe(pipex->cmd))
 		ft_exit(pipex);
 	ft_add_path(pipex);
 	pipex->count = 0;
