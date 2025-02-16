@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 16:45:39 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/16 04:52:04 by wimam            ###   ########.fr       */
+/*   Created: 2025/01/13 17:50:59 by wimam             #+#    #+#             */
+/*   Updated: 2025/02/16 04:43:01 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-int	main(int argc, char *argv[])
+void	free_cmd(char ***cmd)
 {
-	t_pipex	*pipex;
+	int	i;
+	int	j;
 
-	if (argc != 5)
-		return (error_msg(1), 1);
-	pipex = pipex_init(--argc, ++argv);
-	if (!pipex)
-		return (1);
-	ft_start(pipex, pipex->infd);
-	ft_exit(pipex);
-	return (0);
+	i = 0;
+	while (cmd[i])
+	{
+		j = 0;
+		while (cmd[i][j])
+			free(cmd[i][j++]);
+		free(cmd[i++]);
+	}
+	free(cmd);
+}
+
+void	ft_exit(t_pipex *pipex)
+{
+	close(pipex->infd);
+	close(pipex->outfd);
+	free_cmd(pipex->cmd);
+	free(pipex);
+	exit(0);
 }
