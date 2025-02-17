@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:56:14 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/16 04:43:03 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/17 23:49:47 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	error_msg(int msg)
 	else if (msg == 6)
 		ft_putstr_fd("ERROR : Faild to open fd\n", 2);
 	else if (msg == 7)
-		ft_putstr_fd("EROOR : execution failed \n", 2);
+		ft_putstr_fd("command not found \n", 2);
 	else if (msg == 8)
 		ft_putstr_fd("ERROR : pipe creation failed \n", 2);
 	else if (msg == 9)

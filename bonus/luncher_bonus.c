@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/16 04:42:55 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/17 23:49:38 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_execute(t_pipex *pipex, int rfd, int wfd)
 	count = pipex->count;
 	failed = execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
 	if (failed == -1)
-		return (error_msg(7), close(rfd), close (wfd), ft_exit(pipex));
+		return (error_msg(7), (void)0);
 }
 
 void	ft_start(t_pipex *pipex, int rfd)
