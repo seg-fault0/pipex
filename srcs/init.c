@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/16 05:13:29 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/17 23:23:03 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,13 @@ void	ft_add_path(t_pipex *pipex)
 	while (pipex->cmd[i])
 	{
 		tmp = pipex->cmd[i][0];
-		pipex->cmd[i][0] = ft_strjoin(BIN_PATH, pipex->cmd[i][0]);
-		free(tmp);
+		if (pipex->cmd[i][0][0] != '/')
+		{
+			pipex->cmd[i][0] = ft_strjoin(BIN_PATH, pipex->cmd[i][0]);
+			free(tmp);
+		}
 		i++;
 	}
-}
-
-int	are_cmd_exe(char ***cmd)
-{
-	int		i;
-	char	*tmp_cmd;
-
-	i = 0;
-	while (cmd[i])
-	{
-		tmp_cmd = ft_strjoin(BIN_PATH, cmd[i][0]);
-		if (access(tmp_cmd, X_OK) != 0)
-			return (free(tmp_cmd), error_msg(4), 1);
-		free(tmp_cmd);
-		i++;
-	}
-	return (0);
 }
 
 char	***get_cmd(int argc, char *argv[])
@@ -80,8 +66,6 @@ t_pipex	*pipex_init(int argc, char *argv[])
 	pipex->cmd = get_cmd(argc, argv);
 	if (!pipex->cmd)
 		return (ft_exit(pipex), NULL);
-	if (are_cmd_exe(pipex->cmd))
-		ft_exit(pipex);
 	ft_add_path(pipex);
 	pipex->count = 0;
 	pipex->max_count = argc - 2;
