@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 04:41:33 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/18 23:55:41 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/19 00:09:03 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 //headers
 # include <unistd.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <sys/wait.h>
