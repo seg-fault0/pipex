@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/17 23:50:37 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/18 03:25:40 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void	ft_start(t_pipex *pipex, int rfd)
 	if (pid == 0)
 	{
 		ft_execute(pipex, rfd, pfd[1]);
-		if (pipex->count != 0)
-			close (rfd);
+		close (rfd);
 		close_pipe(pfd);
 	}
 	else
 	{
 		wait(NULL);
 		close(pfd[1]);
+		close(rfd);
 		pipex->count++;
 		ft_start(pipex, pfd[0]);
 	}
