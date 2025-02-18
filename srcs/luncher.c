@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/18 03:25:40 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/19 00:15:20 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	ft_start(t_pipex *pipex, int rfd)
 		return ;
 	pid = pipe(pfd);
 	if (pid == -1)
-		return (close(rfd), error_msg(8), ft_exit(pipex));
+		return (close(rfd), error_msg(8), ft_exit(pipex, 0));
 	pid = fork();
 	if (pid == -1)
-		return (close (rfd), close_pipe(pfd), error_msg(9), ft_exit(pipex));
+		return (close (rfd), close_pipe(pfd), error_msg(9), ft_exit(pipex, 0));
 	if (pid == 0)
 	{
 		ft_execute(pipex, rfd, pfd[1]);

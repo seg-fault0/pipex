@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:39 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/16 04:52:04 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/19 00:15:36 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	main(int argc, char *argv[])
 	if (!pipex)
 		return (1);
 	ft_start(pipex, pipex->infd);
-	ft_exit(pipex);
+	if (access(pipex->cmd[pipex->count - 1][0], X_OK))
+		ft_exit(pipex, 127);
+	ft_exit(pipex, 0);
 	return (0);
 }
