@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 04:30:33 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/19 05:02:54 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	***get_cmd(int argc, char *argv[])
 	return (cmd);
 }
 
-int	get_doc_fd(char *argv[])
+int	get_doc_fd(int *argc, char ***argv)
 {
 	int		pfd[2];
 	char	*line;
@@ -59,7 +59,7 @@ int	get_doc_fd(char *argv[])
 		return (error_msg(8), -1);
 	ft_putstr_fd("pipe heredoc> ", 1);
 	line = get_next_line(0);
-	while (!ft_strcmp(line, argv[1]))
+	while (!ft_strcmp(line, argv[0][1]))
 	{
 		write(pfd[1], line, ft_strlen(line));
 		free(line);
@@ -68,10 +68,12 @@ int	get_doc_fd(char *argv[])
 	}
 	if (line)
 		free(line);
+	*argc -= 2;
+	*argv += 2;
 	return (close(pfd[1]), pfd[0]);
 }
 
-t_pipex	*pipex_init(int argc, char *argv[])
+t_pipex	*pipex_init(int argc, char **argv)
 {
 	t_pipex	*pipex;
 
@@ -79,11 +81,7 @@ t_pipex	*pipex_init(int argc, char *argv[])
 	if (!pipex)
 		return (error_msg(5), NULL);
 	if (ft_strcmp("here_doc", argv[0]))
-	{
-		pipex->infd = get_doc_fd(argv);
-		argc -= 2;
-		argv += 2;
-	}
+		pipex->infd = get_doc_fd(&argc, &argv);
 	else
 		pipex->infd = open(argv[0], O_RDONLY);
 	if (pipex->infd < 0 && !access(argv[0], R_OK))
