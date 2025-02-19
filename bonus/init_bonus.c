@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 05:24:21 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/19 05:45:26 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	get_doc_fd(int *argc, char ***argv)
 	}
 	if (line)
 		free(line);
+	get_next_line(-9);
 	*argc -= 2;
 	*argv += 2;
 	return (close(pfd[1]), pfd[0]);
