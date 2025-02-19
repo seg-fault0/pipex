@@ -36,7 +36,7 @@ $(BNAME) : $(BOBG)
 
 $(OBG) : %.o : %.c ./includes/pipex.h
 	cc -c $(FLAGS) $(I) $< -o $@
-$(BOBG) : %.o : %.c ./includes/pipex_bonus.h
+$(BOBG) : %.o : %.c ./includes/pipex_bonus.h ./includes/get_next_line_bonus.h
 	cc -c $(FLAGS) $(I) $< -o $@
 
 clean : 
