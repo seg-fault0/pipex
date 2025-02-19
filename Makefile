@@ -6,13 +6,15 @@ SRCS =	srcs/error.c	\
 		srcs/main.c		\
 		srcs/utils.c	\
 
-BSRCS = bonus/error_bonus.c		\
-		bonus/luncher_bonus.c	\
-		bonus/exit_bonus.c		\
-		bonus/ft_split_bonus.c	\
-		bonus/init_bonus.c		\
-		bonus/main_bonus.c		\
-		bonus/utils_bonus.c		\
+BSRCS = bonus/error_bonus.c					\
+		bonus/luncher_bonus.c				\
+		bonus/exit_bonus.c					\
+		bonus/ft_split_bonus.c				\
+		bonus/get_next_line_bonus.c			\
+		bonus/get_next_line_utils_bonus.c	\
+		bonus/init_bonus.c					\
+		bonus/main_bonus.c					\
+		bonus/utils_bonus.c					\
 
 OBG	=	$(SRCS:.c=.o)
 BOBG =	$(BSRCS:.c=.o)

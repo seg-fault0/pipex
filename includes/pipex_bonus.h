@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 04:41:33 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 00:09:03 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/19 03:34:45 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+# include "get_next_line_bonus.h"
 
 //Macros
 # define BIN_PATH "/usr/bin/"
@@ -36,9 +37,10 @@ typedef struct s_pipex
 
 //utils
 char	**ft_split(char const *s, char c);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 void	close_pipe(int *fd);
 void	ft_putstr_fd(char *s, int fd);
+int		ft_strcmp(char *s1, char *s2);
 
 //core
 t_pipex	*pipex_init(int argc, char *argv[]);

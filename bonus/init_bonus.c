@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 01:37:08 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/19 04:30:33 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,27 @@ char	***get_cmd(int argc, char *argv[])
 	return (cmd);
 }
 
+int	get_doc_fd(char *argv[])
+{
+	int		pfd[2];
+	char	*line;
+
+	if (pipe(pfd) == -1)
+		return (error_msg(8), -1);
+	ft_putstr_fd("pipe heredoc> ", 1);
+	line = get_next_line(0);
+	while (!ft_strcmp(line, argv[1]))
+	{
+		write(pfd[1], line, ft_strlen(line));
+		free(line);
+		ft_putstr_fd("pipe heredoc> ", 1);
+		line = get_next_line(0);
+	}
+	if (line)
+		free(line);
+	return (close(pfd[1]), pfd[0]);
+}
+
 t_pipex	*pipex_init(int argc, char *argv[])
 {
 	t_pipex	*pipex;
@@ -57,7 +78,14 @@ t_pipex	*pipex_init(int argc, char *argv[])
 	pipex = malloc(sizeof(pipex));
 	if (!pipex)
 		return (error_msg(5), NULL);
-	pipex->infd = open(argv[0], O_RDONLY);
+	if (ft_strcmp("here_doc", argv[0]))
+	{
+		pipex->infd = get_doc_fd(argv);
+		argc -= 2;
+		argv += 2;
+	}
+	else
+		pipex->infd = open(argv[0], O_RDONLY);
 	if (pipex->infd < 0 && !access(argv[0], R_OK))
 		return (free(pipex), error_msg(10), NULL);
 	if (pipex->infd < 0)

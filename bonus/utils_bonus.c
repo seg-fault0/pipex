@@ -6,25 +6,13 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:02:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/16 04:42:50 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/19 03:55:49 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	ft_strlen(const char *str)
-{
-	int	len;
-
-	if (!str)
-		return (0);
-	len = 0;
-	while (str[len] != '\0')
-		len++;
-	return (len);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		len;
 	int		i;
@@ -71,4 +59,22 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, &s[i], 1);
 		i++;
 	}
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	if (s1[i] == '\n')
+		return (1);
+	if (s1[i] || s2[i])
+		return (0);
+	return (1);
 }
