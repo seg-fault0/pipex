@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/18 23:56:32 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/19 02:02:30 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	ft_execute(t_pipex *pipex, int rfd, int wfd)
 	count = pipex->count;
 	failed = execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
 	if (failed == -1)
-		return (error_msg(7), (void)0);
+		return (error_msg(7), close_pipe((int []){rfd, wfd}),
+			ft_exit(pipex, 127), (void)0);
 }
 
 void	ft_start(t_pipex *pipex, int rfd)
@@ -42,7 +43,7 @@ void	ft_start(t_pipex *pipex, int rfd)
 	int	pid;
 
 	if (pipex->count == pipex->max_count)
-		return ;
+		return (close(rfd), (void)0);
 	pid = pipe(pfd);
 	if (pid == -1)
 		return (close(rfd), error_msg(8), ft_exit(pipex, 1));
@@ -58,8 +59,7 @@ void	ft_start(t_pipex *pipex, int rfd)
 	else
 	{
 		wait(NULL);
-		close(pfd[1]);
-		close(rfd);
+		close_pipe((int []){pfd[1], rfd});
 		pipex->count++;
 		ft_start(pipex, pfd[0]);
 	}
