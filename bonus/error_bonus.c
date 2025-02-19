@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:56:14 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 01:34:00 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/19 05:22:43 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error_msg(int msg)
 {
 	if (msg == 1)
-		ft_putstr_fd("ERROR : not enough args\n", 2);
+		ft_putstr_fd("ERROR : wrong args\n", 2);
 	else if (msg == 2)
 		ft_putstr_fd("ERROR : fd duplication faild\n", 2);
 	else if (msg == 3)

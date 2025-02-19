@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 05:02:54 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/19 05:24:21 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	get_doc_fd(int *argc, char ***argv)
 	int		pfd[2];
 	char	*line;
 
+	if (*argc != 5)
+		return (error_msg(1), -1);
 	if (pipe(pfd) == -1)
 		return (error_msg(8), -1);
 	ft_putstr_fd("pipe heredoc> ", 1);
@@ -87,7 +89,7 @@ t_pipex	*pipex_init(int argc, char **argv)
 	if (pipex->infd < 0 && !access(argv[0], R_OK))
 		return (free(pipex), error_msg(10), NULL);
 	if (pipex->infd < 0)
-		return (free(pipex), error_msg(6), NULL);
+		return (free(pipex), NULL);
 	pipex->outfd = open(argv[argc - 1], O_WRONLY | O_CREAT, 0644);
 	if (pipex->outfd < 0)
 		return (close(pipex->infd), free(pipex), error_msg(6), NULL);
