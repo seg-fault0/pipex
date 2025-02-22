@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 05:45:26 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/22 23:27:56 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_pipex	*pipex_init(int argc, char **argv)
 {
 	t_pipex	*pipex;
 
-	pipex = malloc(sizeof(pipex));
+	pipex = malloc(sizeof(t_pipex));
 	if (!pipex)
 		return (error_msg(5), NULL);
 	if (ft_strcmp("here_doc", argv[0]))
