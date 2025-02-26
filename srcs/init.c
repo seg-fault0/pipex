@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/22 23:27:44 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/26 08:37:54 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ t_pipex	*pipex_init(int argc, char **argv)
 		return (close(pipex->infd), free(pipex), error_msg(6), NULL);
 	pipex->cmd = get_cmd(argc, argv);
 	if (!pipex->cmd)
-		return (ft_exit(pipex, 0), NULL);
+		return (ft_exit(pipex), NULL);
 	ft_add_path(pipex);
 	pipex->count = 0;
 	pipex->max_count = argc - 2;
+	pipex->exit_code = 0;
 	return (pipex);
 }

@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:09 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 05:00:15 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/26 08:37:21 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_pipex
 	int		outfd;
 	int		count;
 	int		max_count;
+	int		exit_code;
 }	t_pipex;
 
 //utils
@@ -43,7 +44,8 @@ void	ft_putstr_fd(char *s, int fd);
 //core
 t_pipex	*pipex_init(int argc, char **argv);
 void	ft_start(t_pipex *pipex, int rfd);
-void	ft_exit(t_pipex *pipex, int code);
+void	ft_exit(t_pipex *pipex);
+void	free_all(t_pipex *pipex);
 void	free_cmd(char ***cmd);
 void	error_msg(int msg);
 

@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 02:02:38 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/26 08:50:33 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,22 @@ void	fd_manager(t_pipex *pipex, int rfd, int wfd)
 		dup2(wfd, STDOUT);
 }
 
-void	ft_execute(t_pipex *pipex, int rfd, int wfd)
+void	ft_chiled(t_pipex *pipex, int rfd, int *pfd)
 {
 	int	count;
 	int	failed;
 
-	fd_manager(pipex, rfd, wfd);
+	fd_manager(pipex, rfd, pfd[1]);
 	count = pipex->count;
 	failed = execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
+	close (rfd);
+	close_pipe(pfd);
 	if (failed == -1)
-		return (error_msg(7), close_pipe((int []){rfd, wfd}),
-			ft_exit(pipex, 127), (void)0);
+	{
+		error_msg(7);
+		free_all(pipex);
+		exit(127);
+	}
 }
 
 void	ft_start(t_pipex *pipex, int rfd)
@@ -46,19 +51,15 @@ void	ft_start(t_pipex *pipex, int rfd)
 		return ;
 	pid = pipe(pfd);
 	if (pid == -1)
-		return (close(rfd), error_msg(8), ft_exit(pipex, 0));
+		return (close(rfd), error_msg(8), ft_exit(pipex));
 	pid = fork();
 	if (pid == -1)
-		return (close (rfd), close_pipe(pfd), error_msg(9), ft_exit(pipex, 0));
+		return (close (rfd), close_pipe(pfd), error_msg(9), ft_exit(pipex));
 	if (pid == 0)
-	{
-		ft_execute(pipex, rfd, pfd[1]);
-		close (rfd);
-		close_pipe(pfd);
-	}
+		ft_chiled(pipex, rfd, pfd);
 	else
 	{
-		wait(NULL);
+		wait(&pipex->exit_code);
 		close_pipe((int []){pfd[1], rfd});
 		pipex->count++;
 		ft_start(pipex, pfd[0]);

@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 00:15:46 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/26 08:38:33 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,19 @@ void	free_cmd(char ***cmd)
 	free(cmd);
 }
 
-void	ft_exit(t_pipex *pipex, int code)
+void	free_all(t_pipex *pipex)
 {
 	close(pipex->infd);
 	close(pipex->outfd);
 	free_cmd(pipex->cmd);
 	free(pipex);
+}
+
+void	ft_exit(t_pipex *pipex)
+{
+	int	code;
+
+	code = WEXITSTATUS(pipex->exit_code);
+	free_all(pipex);
 	exit(code);
 }
