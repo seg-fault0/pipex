@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/26 09:39:26 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/27 08:46:13 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ void	fd_manager(t_pipex *pipex, int rfd, int wfd)
 {
 	dup2(rfd, STDIN);
 	if (pipex->count == pipex->max_count - 1)
-	{
 		dup2(pipex->outfd, STDOUT);
-		close(wfd);
-	}
 	else
 		dup2(wfd, STDOUT);
 }
@@ -63,5 +60,6 @@ void	ft_start(t_pipex *pipex, int rfd)
 		close_pipe((int []){pfd[1], rfd});
 		pipex->count++;
 		ft_start(pipex, pfd[0]);
+		close(pfd[0]);
 	}
 }
