@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:56:14 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 05:22:43 by wimam            ###   ########.fr       */
+/*   Updated: 2025/02/27 08:23:58 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error_msg(int msg)
 {
 	if (msg == 1)
-		ft_putstr_fd("ERROR : wrong args\n", 2);
+		ft_putstr_fd("ERROR : Not enough args\n", 2);
 	else if (msg == 2)
 		ft_putstr_fd("ERROR : fd duplication faild\n", 2);
 	else if (msg == 3)
@@ -25,7 +25,7 @@ void	error_msg(int msg)
 	else if (msg == 5)
 		ft_putstr_fd("EROOR : Allocation Failed\n", 2);
 	else if (msg == 6)
-		ft_putstr_fd("ERROR : Faild to open fd\n", 2);
+		ft_putstr_fd("ERROR : no such file or directory\n", 2);
 	else if (msg == 7)
 		ft_putstr_fd("command not found \n", 2);
 	else if (msg == 8)
