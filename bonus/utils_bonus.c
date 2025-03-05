@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:02:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/19 03:55:49 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/05 15:03:41 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,25 @@ int	ft_strcmp(char *s1, char *s2)
 	if (s1[i] || s2[i])
 		return (0);
 	return (1);
+}
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t	i;
+	char	*tmpdst;
+	char	*tmpsrc;
+
+	i = 0;
+	if (!src && !dst)
+		return (NULL);
+	if (dst == src)
+		return (dst);
+	tmpdst = (char *)dst;
+	tmpsrc = (char *)src;
+	while (i < n)
+	{
+		tmpdst[i] = tmpsrc[i];
+		i++;
+	}
+	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:02:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/09 17:50:05 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/05 15:02:08 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,25 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, &s[i], 1);
 		i++;
 	}
+}
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t	i;
+	char	*tmpdst;
+	char	*tmpsrc;
+
+	i = 0;
+	if (!src && !dst)
+		return (NULL);
+	if (dst == src)
+		return (dst);
+	tmpdst = (char *)dst;
+	tmpsrc = (char *)src;
+	while (i < n)
+	{
+		tmpdst[i] = tmpsrc[i];
+		i++;
+	}
+	return (dst);
 }
