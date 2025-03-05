@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:32:44 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/05 15:03:38 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/05 16:17:56 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,40 @@ static int	ft_row(char const *s, char c)
 	return (ret);
 }
 
-static char	*ft_fill(char const *s, char c)
+int	get_len(const char *s, char c)
+{
+	int	len;
+
+	len = 0;
+	if (*s != '\'')
+		while (s[len] && s[len] != c)
+			len++;
+	else
+	{
+		s++;
+		while (s[len] && s[len] != '\'')
+			len++;
+	}
+	return (len);
+}
+
+static char	*ft_fill(char const **s, char c)
 {
 	int		len;
 	char	*buffer;
 
-	len = 0;
-	while (s[len] && s[len] != c)
-		len++;
+	len = get_len(*s, c);
 	buffer = malloc(len + 1);
 	if (!buffer)
 		return (NULL);
-	ft_memcpy(buffer, s, len);
+	if (s[0][0] != '\'')
+		ft_memcpy(buffer, s[0], len);
+	else
+		ft_memcpy(buffer, &s[0][1], len);
 	buffer[len] = '\0';
+	if (s[0][0] == '\'')
+		*s += 2;
+	*s += len;
 	return (buffer);
 }
 
@@ -58,13 +79,11 @@ char	**ft_split(char const *s, char c)
 	if (!buffer)
 		return (NULL);
 	i = 0;
-	while (i < row)
+	while (i < row && *s)
 	{
 		while (*s && *s == c)
 			s++;
-		buffer[i++] = ft_fill(s, c);
-		while (*s && *s != c)
-			s++;
+		buffer[i++] = ft_fill(&s, c);
 	}
 	buffer[row] = NULL;
 	return (buffer);
