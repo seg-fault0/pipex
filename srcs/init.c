@@ -6,48 +6,46 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/26 09:34:02 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/06 13:29:05 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_add_path(t_pipex *pipex)
+char	*ft_strdup(char *s)
 {
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (pipex->cmd[i])
-	{
-		tmp = pipex->cmd[i][0];
-		if (access(tmp, X_OK))
-		{
-			pipex->cmd[i][0] = ft_strjoin(BIN_PATH, pipex->cmd[i][0]);
-			free(tmp);
-		}
-		i++;
-	}
-}
-
-char	***get_cmd(int argc, char **argv)
-{
-	char	***cmd;
+	char	*buffer;
 	int		i;
 
-	cmd = malloc ((argc - 2) * sizeof(char **) + 1);
-	if (!cmd)
+	buffer = malloc(ft_strlen(s + 1));
+	if (!buffer)
 		return (NULL);
 	i = 0;
-	while (i < argc - 2)
+	while(s[i])
 	{
-		cmd[i] = ft_split(argv[i + 1], ' ');
-		if (!cmd[i])
-			return (error_msg(5), cmd);
+		buffer[i] = s[i];
 		i++;
 	}
-	cmd[i] = NULL;
-	return (cmd);
+	buffer[i] = '\0';
+	return (buffer);
+}
+
+void	add_path(t_pipex *pipex)
+{
+	char *tmp;
+
+	tmp = pipex->cmd1[0];
+	if (access(tmp, X_OK))
+	{
+		pipex->cmd1[0] = ft_strjoin(BIN_PATH, tmp);
+		free(tmp);
+	}
+	tmp = pipex->cmd2[0];
+	if (access(tmp, X_OK))
+	{
+		pipex->cmd2[0] = ft_strjoin(BIN_PATH, tmp);
+		free(tmp);
+	}
 }
 
 t_pipex	*pipex_init(int argc, char **argv)
@@ -65,12 +63,8 @@ t_pipex	*pipex_init(int argc, char **argv)
 	pipex->outfd = open(argv[argc - 1], O_WRONLY | O_CREAT, 0644);
 	if (pipex->outfd < 0)
 		return (close(pipex->infd), free(pipex), error_msg(6), NULL);
-	pipex->cmd = get_cmd(argc, argv);
-	if (!pipex->cmd)
-		return (ft_exit(pipex), NULL);
-	ft_add_path(pipex);
-	pipex->count = 0;
-	pipex->max_count = argc - 2;
-	pipex->exit_code = 0;
+	pipex->cmd1 = ft_split(argv[1], ' ');
+	pipex->cmd2 = ft_split(argv[2], ' ');
+	add_path(pipex);
 	return (pipex);
 }
