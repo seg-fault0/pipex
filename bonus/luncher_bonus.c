@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/27 08:46:00 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/07 14:25:07 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ void	ft_start(t_pipex *pipex, int rfd)
 
 	if (pipex->count == pipex->max_count)
 		return ;
-	pid = pipe(pfd);
-	if (pid == -1)
+	if (pipe(pfd) == -1)
 		return (close(rfd), error_msg(8), ft_exit(pipex));
 	pid = fork();
 	if (pid == -1)
