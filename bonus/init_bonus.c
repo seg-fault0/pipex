@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/27 08:23:07 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/14 02:39:11 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ t_pipex	*pipex_init(int argc, char **argv)
 		pipex->infd = get_doc_fd(&argc, &argv);
 	else
 		pipex->infd = open(argv[0], O_RDONLY);
-	if (pipex->infd < 0 && access(argv[0], R_OK))
-		return (free(pipex), error_msg(10), exit(1), NULL);
-	if (pipex->infd < 0)
+	if (pipex->infd < 0 && access(argv[0], F_OK))
 		return (free(pipex), error_msg(6), exit(1), NULL);
+	if (pipex->infd < 0)
+		return (free(pipex), error_msg(10), exit(1), NULL);
 	pipex->outfd = open(argv[argc - 1], O_WRONLY | O_CREAT, 0644);
 	if (pipex->outfd < 0)
 		return (close(pipex->infd), free(pipex), error_msg(6), NULL);
