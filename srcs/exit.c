@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/16 17:42:55 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/16 23:08:42 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_cmd(char ***cmd)
 	free(cmd);
 }
 
-void ft_free2darr(char **arr)
+void	ft_free2darr(char **arr)
 {
 	int	i;
 
