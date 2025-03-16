@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:02:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/05 15:03:41 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/16 23:14:27 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	buffer[i] = '\0';
 	return (buffer);
-}
-
-void	close_pipe(int *fd)
-{
-	close (fd[0]);
-	close (fd[1]);
 }
 
 void	ft_putstr_fd(char *s, int fd)
@@ -98,4 +92,22 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 		i++;
 	}
 	return (dst);
+}
+
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	const unsigned char	*buffer1;
+	const unsigned char	*buffer2;
+	size_t				i;
+
+	buffer1 = (const unsigned char *) s1;
+	buffer2 = (const unsigned char *) s2;
+	i = 0;
+	while (i < n)
+	{
+		if (buffer1[i] != buffer2[i])
+			return (buffer1[i] - buffer2[i]);
+		i++;
+	}
+	return (0);
 }

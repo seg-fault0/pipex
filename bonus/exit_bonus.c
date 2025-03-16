@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/27 08:20:32 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/16 23:14:02 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ void	free_all(t_pipex *pipex)
 	free(pipex);
 }
 
+void	ft_free2darr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
 void	ft_exit(t_pipex *pipex)
 {
 	int	code;
@@ -43,4 +53,10 @@ void	ft_exit(t_pipex *pipex)
 	code = WEXITSTATUS(pipex->exit_code);
 	free_all(pipex);
 	exit(code);
+}
+
+void	close_pipe(int *fd)
+{
+	close (fd[0]);
+	close (fd[1]);
 }
