@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/27 08:46:13 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/16 01:54:51 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	ft_chiled(t_pipex *pipex, int rfd, int *pfd)
 
 	fd_manager(pipex, rfd, pfd[1]);
 	count = pipex->count;
-	failed = execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
 	close (rfd);
 	close_pipe(pfd);
+	failed = execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
 	if (failed == -1)
 	{
 		error_msg(7);
@@ -46,8 +46,7 @@ void	ft_start(t_pipex *pipex, int rfd)
 
 	if (pipex->count == pipex->max_count)
 		return ;
-	pid = pipe(pfd);
-	if (pid == -1)
+	if (pipe(pfd))
 		return (close(rfd), error_msg(8), ft_exit(pipex));
 	pid = fork();
 	if (pid == -1)
@@ -56,10 +55,10 @@ void	ft_start(t_pipex *pipex, int rfd)
 		ft_chiled(pipex, rfd, pfd);
 	else
 	{
-		wait(&pipex->exit_code);
 		close_pipe((int []){pfd[1], rfd});
 		pipex->count++;
 		ft_start(pipex, pfd[0]);
 		close(pfd[0]);
+		wait(&pipex->exit_code);
 	}
 }
