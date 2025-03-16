@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/16 17:38:50 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/16 17:42:45 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ft_add_path(t_pipex *pipex , char **env)
 			free(tmp);
 		}
 	}
+	ft_free2darr(paths);
 }
 
 char	***get_cmd(int argc, char **argv)

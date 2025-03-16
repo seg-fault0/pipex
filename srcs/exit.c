@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/16 03:56:36 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/16 17:42:55 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void ft_free2darr(char **arr)
 
 	i = 0;
 	while (arr[i])
-		free(arr[i]);
+		free(arr[i++]);
+	free(arr);
 }
 
 void	close_pipe(int *fd)
