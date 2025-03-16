@@ -6,27 +6,61 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/14 02:39:18 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/16 17:38:50 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <stdio.h>
 
-void	ft_add_path(t_pipex *pipex)
+char	**ft_get_paths(char **env)
 {
-	int		i;
 	char	*tmp;
+	char	**paths;
+	int		i;
 
+	i = -1;
+	while (env[++i])
+		if (ft_memcmp("PATH", env[i], 4) == 0)
+			tmp = env[i] + 5;
+	paths = ft_split(tmp, ':');
 	i = 0;
-	while (pipex->cmd[i])
+	while (paths[i])
 	{
-		tmp = pipex->cmd[i][0];
-		if (access(tmp, X_OK))
+		tmp = paths[i];
+		if (tmp[ft_strlen(tmp) - 1] != '/')
 		{
-			pipex->cmd[i][0] = ft_strjoin(BIN_PATH, pipex->cmd[i][0]);
+			paths[i] = ft_strjoin(tmp, "/");
 			free(tmp);
 		}
 		i++;
+	}
+	return (paths);
+}
+
+void	ft_add_path(t_pipex *pipex , char **env)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+	char	**paths;
+
+	paths = ft_get_paths(env);
+	i = -1;
+	while (pipex->cmd[++i])
+	{
+		j = -1;
+		while (paths[++j])
+		{
+			tmp = ft_strjoin(paths[j], pipex->cmd[i][0]);
+			if (!access(tmp, X_OK))
+			{
+				free(pipex->cmd[i][0]);
+				pipex->cmd[i][0] = tmp;
+				break ;
+			}
+			free(tmp);
+		}
 	}
 }
 
@@ -50,7 +84,7 @@ char	***get_cmd(int argc, char **argv)
 	return (cmd);
 }
 
-t_pipex	*pipex_init(int argc, char **argv)
+t_pipex	*pipex_init(int argc, char **argv, char **env)
 {
 	t_pipex	*pipex;
 
@@ -68,7 +102,7 @@ t_pipex	*pipex_init(int argc, char **argv)
 	pipex->cmd = get_cmd(argc, argv);
 	if (!pipex->cmd)
 		return (ft_exit(pipex), NULL);
-	ft_add_path(pipex);
+	ft_add_path(pipex, env);
 	pipex->count = 0;
 	pipex->max_count = argc - 2;
 	pipex->exit_code = 0;

@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/02/26 08:38:33 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/16 03:56:36 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,21 @@ void	free_cmd(char ***cmd)
 		free(cmd[i++]);
 	}
 	free(cmd);
+}
+
+void ft_free2darr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		free(arr[i]);
+}
+
+void	close_pipe(int *fd)
+{
+	close (fd[0]);
+	close (fd[1]);
 }
 
 void	free_all(t_pipex *pipex)

@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:45:09 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/05 15:03:13 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/16 17:30:18 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,12 @@ char	*ft_strjoin(char const *s1, char const *s2);
 void	close_pipe(int *fd);
 void	ft_putstr_fd(char *s, int fd);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+int		ft_memcmp(const void *s1, const void *s2, size_t n);
+void	ft_free2darr(char **arr);
+int		ft_strlen(const char *str);
 
 //core
-t_pipex	*pipex_init(int argc, char **argv);
+t_pipex	*pipex_init(int argc, char **argv, char **env);
 void	ft_start(t_pipex *pipex, int rfd);
 void	ft_exit(t_pipex *pipex);
 void	free_all(t_pipex *pipex);
