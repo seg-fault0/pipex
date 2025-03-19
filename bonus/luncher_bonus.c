@@ -6,11 +6,25 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/16 01:56:30 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/19 22:13:38 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
+
+void	ft_wait(t_pipex *pipex)
+{
+	int	i;
+	int	id;
+
+	i = 0;
+	while (i < pipex->count)
+	{
+		id = pipex->children_pid[i];
+		waitpid(id, &pipex->exit_code, 0);
+		i++;
+	}
+}
 
 void	fd_manager(t_pipex *pipex, int rfd, int wfd)
 {
@@ -33,6 +47,7 @@ void	ft_chiled(t_pipex *pipex, int rfd, int *pfd)
 	failed = execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
 	if (failed == -1)
 	{
+		ft_wait(pipex);
 		error_msg(7);
 		free_all(pipex);
 		exit(127);
@@ -56,9 +71,10 @@ void	ft_start(t_pipex *pipex, int rfd)
 	else
 	{
 		close_pipe((int []){pfd[1], rfd});
+		pipex->children_pid[pipex->count] = pid;
 		pipex->count++;
 		ft_start(pipex, pfd[0]);
 		close(pfd[0]);
-		wait(&pipex->exit_code);
+		ft_wait(pipex);
 	}
 }

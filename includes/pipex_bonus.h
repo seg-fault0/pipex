@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 04:41:33 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/16 23:14:43 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/19 22:13:52 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 typedef struct s_pipex
 {
 	char	***cmd;
+	int		*children_pid;
 	int		infd;
 	int		outfd;
 	int		count;

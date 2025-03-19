@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/16 23:14:02 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/19 22:14:31 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	free_all(t_pipex *pipex)
 	close(pipex->infd);
 	close(pipex->outfd);
 	free_cmd(pipex->cmd);
+	free(pipex->children_pid);
 	free(pipex);
 }
 
