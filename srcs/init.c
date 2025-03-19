@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/16 23:08:53 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/19 22:00:51 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ t_pipex	*pipex_init(int argc, char **argv, char **env)
 	pipex = malloc(sizeof(t_pipex));
 	if (!pipex)
 		return (error_msg(5), NULL);
+	pipex->children_pid = malloc((argc - 2) * 4);
+	if (!pipex->children_pid)
+		return (free(pipex), error_msg(5), NULL);
 	pipex->infd = open(argv[0], O_RDONLY);
 	if (pipex->infd < 0 && access(argv[0], F_OK))
 		return (free(pipex), error_msg(6), exit(1), NULL);
