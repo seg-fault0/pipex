@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/19 22:15:37 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/20 02:14:52 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,31 +110,28 @@ int	get_doc_fd(int *argc, char ***argv)
 	return (close(pfd[1]), pfd[0]);
 }
 
-t_pipex	*pipex_init(int argc, char **argv, char **env)
+int	pipex_init(t_pipex *pipex, int argc, char **argv, char **env)
 {
-	t_pipex	*pipex;
-
-	pipex = malloc(sizeof(t_pipex));
-	if (!pipex)
-		return (error_msg(5), NULL);
 	pipex->children_pid = malloc((argc - 2) * sizeof(int));
+	if (!pipex->children_pid)
+		return (1);
 	if (ft_strcmp("here_doc", argv[0]))
 		pipex->infd = get_doc_fd(&argc, &argv);
 	else
 		pipex->infd = open(argv[0], O_RDONLY);
 	if (pipex->infd < 0 && access(argv[0], F_OK))
-		return (free(pipex), error_msg(6), exit(1), NULL);
+		return (error_msg(6), exit(1), 1);
 	if (pipex->infd < 0)
-		return (free(pipex), error_msg(10), exit(1), NULL);
+		return (error_msg(10), exit(1), 1);
 	pipex->outfd = open(argv[argc - 1], O_WRONLY | O_CREAT, 0644);
 	if (pipex->outfd < 0)
-		return (close(pipex->infd), free(pipex), error_msg(6), NULL);
+		return (close(pipex->infd), free(pipex), error_msg(6), 1);
 	pipex->cmd = get_cmd(argc, argv);
 	if (!pipex->cmd)
-		return (ft_exit(pipex), NULL);
+		return (ft_exit(pipex), 1);
 	ft_add_path(pipex, env);
 	pipex->count = 0;
 	pipex->max_count = argc - 2;
 	pipex->exit_code = 0;
-	return (pipex);
+	return (0);
 }
