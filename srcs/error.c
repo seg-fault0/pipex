@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:56:14 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/19 22:06:21 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/21 14:46:41 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	error_msg(int msg)
 	else if (msg == 5)
 		ft_putstr_fd("EROOR : Allocation Failed\n", 2);
 	else if (msg == 6)
-		ft_putstr_fd("ERROR : no such file or directory\n", 2);
+		ft_putstr_fd("no such file or directory\n", 2);
 	else if (msg == 7)
 		write(2, "command not found \n", 19);
 	else if (msg == 8)
