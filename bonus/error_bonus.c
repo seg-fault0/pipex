@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:56:14 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/21 14:46:50 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/21 14:59:14 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,6 @@ void	error_msg(int msg)
 		ft_putstr_fd("ERROR : fork failed \n", 2);
 	else if (msg == 10)
 		ft_putstr_fd("permission denied \n", 2);
+	else if (msg == 11)
+		ft_putstr_fd("syntaxe error\n", 2);
 }

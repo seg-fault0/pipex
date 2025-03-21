@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/20 02:14:52 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/21 15:01:44 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,15 @@ char	***get_cmd(int argc, char *argv[])
 	return (cmd);
 }
 
-int	get_doc_fd(int *argc, char ***argv)
+int	get_doc_fd(int *argc, char ***argv, int *to_free)
 {
 	int		pfd[2];
 	char	*line;
 
 	if (*argc != 5)
-		return (error_msg(1), -1);
+		return (error_msg(11), free(to_free), exit(1), -1);
 	if (pipe(pfd) == -1)
-		return (error_msg(8), -1);
+		return (error_msg(8), free(to_free), exit(1), -1);
 	ft_putstr_fd("pipe heredoc> ", 1);
 	line = get_next_line(0);
 	while (!ft_strcmp(line, argv[0][1]))
@@ -116,7 +116,7 @@ int	pipex_init(t_pipex *pipex, int argc, char **argv, char **env)
 	if (!pipex->children_pid)
 		return (1);
 	if (ft_strcmp("here_doc", argv[0]))
-		pipex->infd = get_doc_fd(&argc, &argv);
+		pipex->infd = get_doc_fd(&argc, &argv, pipex->children_pid);
 	else
 		pipex->infd = open(argv[0], O_RDONLY);
 	if (pipex->infd < 0 && access(argv[0], F_OK))
