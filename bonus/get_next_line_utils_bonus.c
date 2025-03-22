@@ -27,7 +27,7 @@ char	*ft_init(char *str)
 	return (str);
 }
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	len;
 
@@ -82,7 +82,7 @@ char	*ft_strljoin(char *s1, char *s2, int size)
 	return (buffer);
 }
 
-char	*ft_strdup(char *s)
+char	*ft_strdup(const char *s)
 {
 	char	*dup;
 	int		len;

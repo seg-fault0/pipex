@@ -20,11 +20,11 @@
 #  define BUFFER_SIZE 42
 # endif
 
-int		ft_strlen(char *str);
+int		ft_strlen(const char *str);
 char	*ft_strljoin(char *s1, char *s2, int size);
 int		ft_new_line_check(char *str);
 char	*ft_init(char *str);
-char	*ft_strdup(char *s);
+char	*ft_strdup(const char *s);
 char	*get_next_line(int fd);
 
 #endif

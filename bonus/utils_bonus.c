@@ -12,34 +12,35 @@
 
 #include "pipex_bonus.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		len;
 	int		i;
 	char	*buffer;
 
 	if (!s1 && !s2)
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	buffer = malloc(len + 1);
+	else if (!s1)
+		return (ft_strdup(s2));
+	else if (!s2)
+		return (ft_strdup(s1));
+	buffer = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!buffer)
 		return (NULL);
 	i = 0;
 	while (*s1)
 	{
-		buffer[i] = *s1;
-		i++;
+		buffer[i++] = *s1;
 		s1++;
 	}
 	while (*s2)
 	{
-		buffer[i] = *s2;
-		i++;
+		buffer[i++] = *s2;
 		s2++;
 	}
 	buffer[i] = '\0';
 	return (buffer);
 }
+
 
 void	ft_putstr_fd(char *s, int fd)
 {

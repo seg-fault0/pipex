@@ -39,7 +39,7 @@ typedef struct s_pipex
 
 //utils
 char	**ft_split(char const *s, char c);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin(const char *s1, const char *s2);
 void	close_pipe(int *fd);
 void	ft_putstr_fd(char *s, int fd);
 int		ft_strcmp(char *s1, char *s2);
