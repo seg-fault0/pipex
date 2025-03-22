@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/22 23:04:52 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/22 23:08:48 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	fd_manager(t_pipex *pipex, int rfd, int wfd)
 			ft_exit(0);
 	}
 }
+
 void	ft_chiled(t_pipex *pipex, int rfd, int *pfd)
 {
 	int	count;
