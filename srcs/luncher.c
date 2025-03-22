@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/19 22:07:23 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/22 22:35:21 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,18 @@ void	ft_wait(t_pipex *pipex)
 
 void	fd_manager(t_pipex *pipex, int rfd, int wfd)
 {
-	dup2(rfd, STDIN);
+	if (dup2(rfd, STDIN) == -1)
+		ft_exit(0);
 	if (pipex->count == pipex->max_count - 1)
-		dup2(pipex->outfd, STDOUT);
+	{
+		if (dup2(pipex->outfd, STDOUT) == -1)
+			ft_exit(0);
+	}
 	else
-		dup2(wfd, STDOUT);
+	{
+		if(dup2(wfd, STDOUT) == -1)
+			ft_exit(0);
+	}
 }
 
 void	ft_chiled(t_pipex *pipex, int rfd, int *pfd)

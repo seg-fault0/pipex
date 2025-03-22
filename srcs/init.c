@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/22 21:42:19 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/22 22:35:46 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ int	pipex_init(t_pipex *pipex, int argc, char **argv, char **env)
 	if (pipex->infd < 0)
 	{
 		if (access(argv[0], F_OK))
-			return (error_msg(6), exit(1), 1);
+			error_msg(6);
 		else
-			return (error_msg(10), exit(1), 1);
+			error_msg(10);
 	}
 	pipex->outfd = open(argv[argc - 1], O_WRONLY | O_CREAT, 0644);
 	if (pipex->outfd < 0)
