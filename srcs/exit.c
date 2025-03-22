@@ -6,11 +6,17 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/22 21:33:05 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/22 23:43:45 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_close(int fd)
+{
+	if (fd >= 0)
+		close(fd);
+}
 
 void	free_cmd(char ***cmd)
 {
@@ -40,14 +46,14 @@ void	ft_free2darr(char **arr)
 
 void	close_pipe(int *fd)
 {
-	close (fd[0]);
-	close (fd[1]);
+	ft_close (fd[0]);
+	ft_close (fd[1]);
 }
 
 void	free_all(t_pipex *pipex)
 {
-	close(pipex->infd);
-	close(pipex->outfd);
+	ft_close(pipex->infd);
+	ft_close(pipex->outfd);
 	free_cmd(pipex->cmd);
 	free(pipex->children_pid);
 }
