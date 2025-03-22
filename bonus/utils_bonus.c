@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:02:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/16 23:14:27 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/22 21:14:34 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	buffer[i] = '\0';
 	return (buffer);
 }
-
 
 void	ft_putstr_fd(char *s, int fd)
 {
