@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/22 22:35:21 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/22 22:42:35 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	fd_manager(t_pipex *pipex, int rfd, int wfd)
 	}
 	else
 	{
-		if(dup2(wfd, STDOUT) == -1)
+		if (dup2(wfd, STDOUT) == -1)
 			ft_exit(0);
 	}
 }
