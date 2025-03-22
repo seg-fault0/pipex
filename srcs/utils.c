@@ -24,29 +24,45 @@ int	ft_strlen(const char *str)
 	return (len);
 }
 
+char	*ft_strdup(const char *str)
+{
+	int		i;
+	char	*buffer;
+
+	if (!str)
+		return (NULL);
+	i = ft_strlen(str);
+	buffer = malloc(i + 1);
+	i = -1; 
+	while (str[++i])
+		buffer[i] = str[i];
+	buffer[i] = '\0';
+	return (buffer);
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		len;
 	int		i;
 	char	*buffer;
 
 	if (!s1 && !s2)
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	buffer = malloc(len + 1);
+	else if (!s1)
+		return (ft_strdup(s2));
+	else if (!s2)
+		return (ft_strdup(s1));
+	buffer = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!buffer)
 		return (NULL);
 	i = 0;
 	while (*s1)
 	{
-		buffer[i] = *s1;
-		i++;
+		buffer[i++] = *s1;
 		s1++;
 	}
 	while (*s2)
 	{
-		buffer[i] = *s2;
-		i++;
+		buffer[i++] = *s2;
 		s2++;
 	}
 	buffer[i] = '\0';
@@ -69,20 +85,6 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		i++;
 	}
 	return (0);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int		i;
-
-	if (fd < 0 || !s)
-		return ;
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
 }
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
