@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/23 02:22:16 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/23 02:37:19 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	get_doc_fd(int *argc, char ***argv, int *to_free)
 		return (error_msg(8), free(to_free), exit(1), -1);
 	ft_putstr_fd("pipe heredoc> ", 1);
 	line = get_next_line(0);
-	while (!ft_strcmp(line, argv[0][1]))
+	while (line && !ft_strcmp(line, argv[0][1]))
 	{
 		write(pfd[1], line, ft_strlen(line));
 		free(line);
