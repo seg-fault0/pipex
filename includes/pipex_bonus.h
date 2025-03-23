@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 04:41:33 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/20 02:13:49 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/23 00:09:01 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		ft_strcmp(char *s1, char *s2);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_free2darr(char **arr);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
+void	ft_close(int fd);
 
 //core
 int		pipex_init(t_pipex *pipe, int argc, char **argv, char **env);

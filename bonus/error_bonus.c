@@ -6,11 +6,17 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:56:14 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/21 14:59:14 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/23 00:08:55 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
+
+void	ft_close(int fd)
+{
+	if (fd >= 0)
+		close(fd);
+}
 
 void	error_msg(int msg)
 {

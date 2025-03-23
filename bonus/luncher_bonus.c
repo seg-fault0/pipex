@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/22 23:48:48 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/23 00:10:01 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	fd_manager(t_pipex *pipex, int rfd, int wfd)
 	{
 		free_all(pipex);
 		exit(0);
-	} 
+	}
 	if (pipex->count == pipex->max_count - 1)
 	{
 		if (dup2(pipex->outfd, STDOUT) == -1)

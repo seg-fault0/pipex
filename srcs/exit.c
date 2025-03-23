@@ -6,17 +6,11 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 17:50:59 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/22 23:43:45 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/23 00:08:46 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	ft_close(int fd)
-{
-	if (fd >= 0)
-		close(fd);
-}
 
 void	free_cmd(char ***cmd)
 {
