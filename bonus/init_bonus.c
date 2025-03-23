@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/23 03:06:06 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/23 03:08:21 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_add_path(t_pipex *pipex, char **env)
 
 	paths = ft_get_paths(env);
 	if (!paths)
-		return (free_all(pipex), exit(1));
+		return ;
 	i = -1;
 	while (pipex->cmd[++i])
 	{
