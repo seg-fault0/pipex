@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:55:22 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/23 03:09:25 by wimam            ###   ########.fr       */
+/*   Updated: 2025/03/23 03:12:16 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	***get_cmd(int argc, char **argv)
 	char	***cmd;
 	int		i;
 
-	cmd = malloc ((argc - 2) * sizeof(char **) + 1);
+	cmd = malloc ((argc - 2 + 1) * sizeof(char **));
 	if (!cmd)
 		return (NULL);
 	i = 0;
