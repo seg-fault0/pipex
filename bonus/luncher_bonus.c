@@ -6,7 +6,7 @@
 /*   By: wimam <walidimam69gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:14:05 by wimam             #+#    #+#             */
-/*   Updated: 2025/03/23 00:10:01 by wimam            ###   ########.fr       */
+/*   Updated: 2025/05/07 15:25:46 by wimam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_chiled(t_pipex *pipex, int rfd, int *pfd)
 	count = pipex->count;
 	close (rfd);
 	close_pipe(pfd);
-	failed = execve(pipex->cmd[count][0], pipex->cmd[count], NULL);
+	failed = execve(pipex->cmd[count][0], pipex->cmd[count], pipex->env);
 	if (failed == -1)
 	{
 		ft_wait(pipex);
